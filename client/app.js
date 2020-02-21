@@ -2,6 +2,10 @@ const loginForm = document.getElementById('welcome-form');
 const userNameInput = document.getElementById('username');
 const messagesSection = document.getElementById('messages-section');
 
+const messagesList = document.getElementById('messages-list');
+const addMessageForm = document.getElementById('add-messages-form');
+const messageContentInput = document.getElementById('message-content');
+
 let userName;
 
 function login (e) {
@@ -16,4 +20,33 @@ function login (e) {
     } 
 };
 
+function addMessage (author, textMessage) {
+    const message = document.createElement('li');
+    message.classList.add('message', 'message--received');
+    author == userName? message.classList.add('message--self') : '';
+
+    const messageHeader = document.createElement('h3');
+    messageHeader.classList.add('message__author');
+    author == userName? messageHeader.innerHTML = 'You' : messageHeader.innerHTML = author;
+    const messageContent = document.createElement('div');
+    messageContent.classList.add('message__content');
+    messageContent.innerHTML = textMessage;
+
+    message.appendChild(messageHeader);
+    message.appendChild(messageContent);
+
+    messagesList.insertAdjacentElement('beforeend', message);
+};
+
+function sendMessage (e) {
+    e.preventDefault();
+    if (messageContentInput.value == '') {
+        window.alert('Insert the message');
+    } else {
+        addMessage(userName, messageContentInput.value);
+        messageContentInput.value = null;
+    }
+};
+
+addMessageForm.addEventListener('submit', sendMessage);
 loginForm.addEventListener('submit', login);
