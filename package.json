@@ -1,0 +1,13 @@
+{
+  "name": "ChatApp",
+  "version": "1.0.0",
+  "main": "client/app.js",
+  "license": "MIT",
+  "scripts": {
+    "nodemon": "./node_modules/.bin/nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
