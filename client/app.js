@@ -1,3 +1,7 @@
+
+const socket = io();
+socket.on('message', ({ author, content }) => addMessage(author, content));
+
 const loginForm = document.getElementById('welcome-form');
 const userNameInput = document.getElementById('username');
 const messagesSection = document.getElementById('messages-section');
@@ -40,11 +44,14 @@ function addMessage (author, textMessage) {
 
 function sendMessage (e) {
     e.preventDefault();
-    if (messageContentInput.value == '') {
+    let messageContent = messageContentInput.value;
+
+    if (!messageContent.length) {
         window.alert('Insert the message');
     } else {
-        addMessage(userName, messageContentInput.value);
-        messageContentInput.value = null;
+        addMessage(userName, messageContent);
+        socket.emit('message', { author: userName, text: messageContent});
+        messageContentInput.value = '';
     }
 };
 
