@@ -1,6 +1,6 @@
 
 const socket = io();
-socket.on('message', ({ author, content }) => addMessage(author, content));
+socket.on('message', ({ author, text }) => addMessage(author, text));
 
 const loginForm = document.getElementById('welcome-form');
 const userNameInput = document.getElementById('username');
