@@ -37,6 +37,7 @@ function addMessage (author, textMessage) {
     author == userName? messageHeader.innerHTML = 'You' : messageHeader.innerHTML = author;
     const messageContent = document.createElement('div');
     messageContent.classList.add('message__content');
+    author === 'Chat Boy'? messageContent.style.fontStyle = 'italic' : '';
     messageContent.innerHTML = textMessage;
 
     message.appendChild(messageHeader);
