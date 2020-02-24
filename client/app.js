@@ -2,6 +2,7 @@
 const socket = io();
 
 socket.on('message', ({ author, text }) => addMessage(author, text));
+socket.on('logged', ({ name }) => addMessage('Chat Boy', `${name} has joined conversation`));
 
 const loginForm = document.getElementById('welcome-form');
 const userNameInput = document.getElementById('username');

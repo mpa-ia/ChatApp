@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
     console.log('New client! Its id – ' + socket.id);
     socket.on('logged', (user) => {
       users.push(user);
-      console.log(users);
+      socket.broadcast.emit('logged', user);
       console.log(`User ${user.name} with id ${user.id} has joined`);
     });
     socket.on('message', (message) => { 
