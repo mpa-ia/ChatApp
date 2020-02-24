@@ -4,7 +4,7 @@ const socket = require('socket.io');
 
 const app = express();
 const messages = [];
-const users = [];
+let users = [];
 
 app.use(express.static(path.join(__dirname + '/client')));
 
@@ -30,6 +30,10 @@ io.on('connection', (socket) => {
       messages.push(message);
       socket.broadcast.emit('message', message);
      });
-    socket.on('disconnect', () => { console.log('Oh, socket ' + socket.id + ' has left') });
+    socket.on('disconnect', () => { 
+        console.log('Oh, socket ' + socket.id + ' has left');
+        users = users.filter(user => user.id !== socket.id);
+        console.log(users); 
+    });
     console.log('I\'ve added a listener on message and disconnect events \n');
   });
