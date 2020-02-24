@@ -1,5 +1,6 @@
 
 const socket = io();
+
 socket.on('message', ({ author, text }) => addMessage(author, text));
 
 const loginForm = document.getElementById('welcome-form');
@@ -19,6 +20,7 @@ function login (e) {
         window.alert('Login cannot be empty') 
     } else {
         userName = userNameInput.value;
+        socket.emit('logged', { name: userName, id: socket.id});
         loginForm.classList.remove('show');
         messagesSection.classList.add('show');
     } 

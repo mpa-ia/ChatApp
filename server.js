@@ -4,6 +4,7 @@ const socket = require('socket.io');
 
 const app = express();
 const messages = [];
+const users = [];
 
 app.use(express.static(path.join(__dirname + '/client')));
 
@@ -19,6 +20,11 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
     console.log('New client! Its id – ' + socket.id);
+    socket.on('logged', (user) => {
+      users.push(user);
+      console.log(users);
+      console.log(`User ${user.name} with id ${user.id} has joined`);
+    });
     socket.on('message', (message) => { 
       console.log('Oh, I\'ve got something from ' + socket.id);
       messages.push(message);
